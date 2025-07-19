@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiIfbooksApplication<api-ifbooks>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "mrito.api.ApiIfbooksApplication",
+            "projectName": "api-ifbooks",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

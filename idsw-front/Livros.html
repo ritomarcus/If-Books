@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+  <title>IF Books - Livros</title>
+
+  <!-- CSS locais -->
+  <link rel="stylesheet" href="src/css/global.css" />
+  <link rel="stylesheet" href="src/css/header.css" />
+  <link rel="stylesheet" href="src/css/main.css" />
+  <link rel="stylesheet" href="src/css/aside.css" />
+  <link rel="stylesheet" href="src/css/modal.css" />
+
+  <!-- Bootstrap e ícones -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+</head>
+
+<body>
+  <header>
+    <nav class="navbar bg-light px-3">
+      <div class="container-fluid">
+        <span class="navbar-text fw-bold">
+          Instituto Federal de São João da Boa Vista
+        </span>
+        <span class="navbar-text text-primary fw-semibold">
+          API-IFBOOKS
+        </span>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container-fluid mt-3 ms-3">
+    <div class="row">
+      <aside class="col-md-2 p-3 border-end">
+        <nav>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-3"><a href="index.html" class="nav-link link-dark">Autores</a></li>
+            <li class="nav-item mb-3"><a href="Livros.html" class="nav-link link-dark active">Livros</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="col-md-9 p-4">
+        <section class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+          <h2 class="mb-0">Lista de Livros:</h2>
+
+          <div class="d-flex gap-2">
+            <input type="number" id="inputPesquisaIdLivro" class="form-control" placeholder="ID do livro"
+              style="width: 150px;" aria-label="Pesquisar livro pelo ID" />
+            <button id="btnPesquisarIdLivro" class="btn btn-primary" type="button">
+              <i class="bi bi-search"></i> Pesquisar
+            </button>
+          </div>
+
+          <button type="button" class="btn btn-success" id="btnAdicionarLivro" data-bs-toggle="modal"
+            data-bs-target="#modalCadastroLivro">
+            <i class="bi bi-plus-lg"></i> Adicionar Livro
+          </button>
+        </section>
+
+        <section class="main-content">
+          <div class="table-responsive">
+            <table class="livros-tabela table table-striped table-hover table-bordered mt-1"
+              aria-label="Tabela de livros">
+              <thead class="table-primary">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Editora</th>
+                  <th scope="col">Data de Publicação</th>
+                  <th scope="col">Resumo</th>
+                  <th scope="col">Autor</th>
+                  <th scope="col">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Dados serão preenchidos via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal para adicionar/editar livro -->
+  <div class="modal fade" id="modalCadastroLivro" tabindex="-1" aria-labelledby="modalCadastroLivroLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form id="formLivro" novalidate>
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalCadastroLivroLabel">Cadastrar Novo Livro</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nomeLivro" class="form-label">Nome do Livro:</label>
+                <input type="text" class="form-control" id="nomeLivro" required placeholder="Digite o nome do livro" />
+                <div class="invalid-feedback">Por favor, informe o nome do livro.</div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="editoraLivro" class="form-label">Editora:</label>
+                <input type="text" class="form-control" id="editoraLivro" required placeholder="Digite a editora" />
+                <div class="invalid-feedback">Por favor, informe a editora.</div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="dataPublicacaoLivro" class="form-label">Data de Publicação:</label>
+                <input type="text" class="form-control" id="dataPublicacaoLivro" required placeholder="dd/mm/aaaa" />
+                <div class="invalid-feedback">Por favor, informe a data de publicação.</div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="autorLivro" class="form-label">Autor:</label>
+                <select class="form-select" id="autorLivro" required>
+                  <option value="">Selecione um autor</option>
+                  <!-- Opções serão preenchidas via JavaScript -->
+                </select>
+                <div class="invalid-feedback">Por favor, selecione um autor.</div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="resumoLivro" class="form-label">Resumo:</label>
+              <textarea class="form-control" id="resumoLivro" rows="4" placeholder="Digite um resumo do livro"
+                required></textarea>
+              <div class="invalid-feedback">Por favor, informe o resumo.</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Salvar Livro</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-light text-center text-muted py-3 mt-4">
+    <div class="container">
+      <small>Marcus Rito - BV3044033</small>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script src="src/js/api-client.js"></script>
+  <script src="src/js/livro.js"></script>
+</body>
+
+</html>
